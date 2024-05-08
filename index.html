@@ -20,7 +20,7 @@
   <link href="lib/ionicons/css/ionicons.min.css" rel="stylesheet">
   <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
   <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <!-- Main Stylesheet File -->
   <link href="css/style.css" rel="stylesheet">
 
@@ -175,7 +175,7 @@
           </div>
         </div>
       </div>
-      <div class="row">
+      <div class="row d flex justify-content-center">
         <div class="col-md-4">
           <div class="service-box">
             <div class="service-ico">
@@ -476,7 +476,7 @@
                     </h5>
                   </div>
                   <div>
-                      <form action="" method="post" role="form" class="contactForm">
+                      <form action=""  role="form" class="contactForm" id="submit-form">
                       <div id="sendmessage">Your message has been sent. Thank you!</div>
                       <div id="errormessage"></div>
                       <div class="row">
@@ -565,26 +565,25 @@
 
   <!-- Template Main Javascript File -->
   <script src="js/main.js"></script>
-  <script>
-    function sendEmail(){
-      let name = document.getElementById("name").value;
-      let email = document.getElementById("email").value;
-      let subject = document.getElementById("subject").value;
-      let message = document.getElementById("message").value;
-      let finalMessage = 'Name : ${name} <br> Email : ${email} <br> Subject : ${subject} <br> Message : ${message} <br>';
-      Email.send({
-        Host : "smtp.mailtrap.io",
-        Username : "username",
-        Password : "password",
-        To : 'them@website.com',
-        From : "you@isp.com",
-        Subject : "Mail from website",
-        Body : finalmessage
-    }).then(
-      message => alert(message)
-    );
-    }
-  </script>
+   <script>
+        $("#submit-form").submit((e)=>{
+            e.preventDefault()
+            $.ajax({
+                url:"https://script.google.com/macros/s/AKfycbyIR3U6542xE0IA8xe13C7HXnqU8Mpk8afEdmQpY6t6iZbwGcLKtZh1pkRfMgZQsM5k/exec",
+                data:$("#submit-form").serialize(),
+                method:"post",
+                success:function (response){
+                    alert("Form submitted successfully")
+                    window.location.reload()
+                   
+                },
+                error:function (err){
+                    alert("Something Error")
+    
+                }
+            })
+        })
+    </script>
 
 </body>
 </html>
